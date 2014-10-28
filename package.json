@@ -1,0 +1,33 @@
+{
+  "name": "x-xss-protection",
+  "author": "Adam Baldwin <baldwin@andyet.net> (http://andyet.net/team/baldwin)",
+  "contributors": [
+    "Evan Hahn <me@evanhahn.com> (http://evanhahn.com)"
+  ],
+  "description": "Middleware to set the X-XSS-Protection header",
+  "version": "0.1.0",
+  "keywords": [
+    "helmet",
+    "security",
+    "express",
+    "connect",
+    "xss",
+    "x-xss-protection"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/helmetjs/x-xss-protection.git"
+  },
+  "bugs": "https://github.com/helmetjs/x-xss-protection/issues",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "connect": "^3.3.1",
+    "mocha": "^2.0.1",
+    "supertest": "^0.14.0"
+  },
+  "dependencies": {
+    "platform": "1.2.0"
+  }
+}
