@@ -1,5 +1,7 @@
 # X-XSS-Protection middleware
 
+[![Build Status](https://travis-ci.org/helmetjs/x-xss-protection.svg?branch=master)](https://travis-ci.org/helmetjs/x-xss-protection)
+
 **Trying to prevent:** Cross-site scripting attacks (XSS), a subset of the above.
 
 **How we mitigate this:** The `X-XSS-Protection` HTTP header is a basic protection against XSS. It was originally [by Microsoft](http://blogs.msdn.com/b/ieinternals/archive/2011/01/31/controlling-the-internet-explorer-xss-filter-with-the-x-xss-protection-http-header.aspx) but Chrome has since adopted it as well. To use it:
