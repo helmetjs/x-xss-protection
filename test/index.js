@@ -3,7 +3,7 @@ var xssFilter = require('..');
 var connect = require('connect');
 var request = require('supertest');
 var rfile = require('rfile');
-var each = require('async').eachSeries;
+var each = require('async').each;
 
 describe('xssFilter', function () {
 
