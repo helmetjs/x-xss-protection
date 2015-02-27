@@ -13,8 +13,7 @@ module.exports = function(options) {
 
     return function(req, res, next)  {
 
-      var ua = req.headers['user-agent'] || '';
-      var matches = ua.match(/msie\s*(\d+)/i);
+      var matches = /msie\s*(\d+)/i.exec(req.headers['user-agent']);
 
       var value;
       if (!matches || (parseFloat(matches[1]) >= 9)) {
