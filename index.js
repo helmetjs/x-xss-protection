@@ -1,26 +1,34 @@
-var platform = require('platform');
-
 module.exports = function(options) {
 
   options = options || {};
-  var setOnOldIE = options.setOnOldIE;
 
-  return function(req, res, next)  {
+  if (options.setOnOldIE) {
 
-    var browser = platform.parse(req.headers['user-agent']);
-    var version = parseFloat(browser.version);
-    var isIE = browser.name === 'IE';
+    return function(req, res, next) {
+      res.setHeader('X-XSS-Protection', '1; mode=block');
+      next();
+    };
 
-    var value;
-    if ((!isIE) || (version >= 9) || (setOnOldIE)) {
-      value = '1; mode=block';
-    } else {
-      value = '0';
-    }
+  } else {
 
-    res.setHeader('X-XSS-Protection', value);
-    next();
+    return function(req, res, next)  {
 
-  };
+      var ua = req.headers['user-agent'] || '';
+      var matches = ua.match(/msie\s*(\d+)/i);
+
+      var value;
+      if (!matches || (parseFloat(matches[1]) >= 9)) {
+        value = '1; mode=block';
+      } else {
+        value = '0';
+      }
+
+      res.setHeader('X-XSS-Protection', value);
+      next();
+
+    };
+
+  }
+
 
 };
