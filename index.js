@@ -1,8 +1,6 @@
 module.exports = function(options) {
 
-  options = options || {};
-
-  if (options.setOnOldIE) {
+  if (options && options.setOnOldIE) {
 
     return function(req, res, next) {
       res.setHeader('X-XSS-Protection', '1; mode=block');
