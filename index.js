@@ -9,7 +9,7 @@ module.exports = function(options) {
 
   } else {
 
-    return function(req, res, next)  {
+    return function(req, res, next) {
 
       var matches = /msie\s*(\d+)/i.exec(req.headers['user-agent']);
 
