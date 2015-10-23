@@ -1,4 +1,4 @@
-module.exports = function(options) {
+module.exports = function xXssProtection(options) {
 
   if (options && options.setOnOldIE) {
 
