@@ -4,9 +4,9 @@ var connect = require('connect');
 var request = require('supertest');
 var rfile = require('rfile');
 var each = require('async').each;
+var assert = require('assert');
 
 describe('xssFilter', function () {
-
   function grabList(filename) {
     return rfile(filename)
     .split('\n')
@@ -63,4 +63,8 @@ describe('xssFilter', function () {
     }, done);
   });
 
+  it('names its function and middleware', function () {
+    assert.equal(xssFilter.name, 'xXssProtection');
+    assert.equal(xssFilter().name, 'xXssProtection');
+  });
 });
