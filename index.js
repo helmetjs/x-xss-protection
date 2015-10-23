@@ -2,14 +2,14 @@ module.exports = function(options) {
 
   if (options && options.setOnOldIE) {
 
-    return function(req, res, next) {
+    return function xXssProtection(req, res, next) {
       res.setHeader('X-XSS-Protection', '1; mode=block');
       next();
     };
 
   } else {
 
-    return function(req, res, next) {
+    return function xXssProtection(req, res, next) {
 
       var matches = /msie\s*(\d+)/i.exec(req.headers['user-agent']);
 
