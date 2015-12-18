@@ -6,7 +6,7 @@ var rfile = require('rfile')
 var each = require('async').each
 var assert = require('assert')
 
-describe('xssFilter', function () {
+describe('x-xss-protection', function () {
   function grabList (filename) {
     return rfile(filename)
       .split('\n')
