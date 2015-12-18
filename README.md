@@ -9,13 +9,13 @@ This middleware sets the `X-XSS-Protection` header. On modern browsers, it will 
 To use this middleware:
 
 ```javascript
-var xssFilter = require('x-xss-protection');
-app.use(xssFilter());
+var xssFilter = require('x-xss-protection')
+app.use(xssFilter())
 ```
 
 To force the header to be set to `1; mode=block` on all versions of IE, add the option:
 
 ```javascript
-app.use(xssFilter({ setOnOldIE: true }));
+app.use(xssFilter({ setOnOldIE: true }))
 // This has some security problems for old IE!
 ```
