@@ -1,30 +1,22 @@
-module.exports = function xXssProtection(options) {
-
+module.exports = function xXssProtection (options) {
   if (options && options.setOnOldIE) {
-
-    return function xXssProtection(req, res, next) {
-      res.setHeader('X-XSS-Protection', '1; mode=block');
-      next();
-    };
-
+    return function xXssProtection (req, res, next) {
+      res.setHeader('X-XSS-Protection', '1; mode=block')
+      next()
+    }
   } else {
+    return function xXssProtection (req, res, next) {
+      var matches = /msie\s*(\d+)/i.exec(req.headers['user-agent'])
 
-    return function xXssProtection(req, res, next) {
-
-      var matches = /msie\s*(\d+)/i.exec(req.headers['user-agent']);
-
-      var value;
+      var value
       if (!matches || (parseFloat(matches[1]) >= 9)) {
-        value = '1; mode=block';
+        value = '1; mode=block'
       } else {
-        value = '0';
+        value = '0'
       }
 
-      res.setHeader('X-XSS-Protection', value);
-      next();
-
-    };
-
+      res.setHeader('X-XSS-Protection', value)
+      next()
+    }
   }
-
-};
+}
