@@ -3,7 +3,7 @@ var xssFilter = require('..')
 var connect = require('connect')
 var request = require('supertest')
 var rfile = require('rfile')
-var each = require('async').each
+var each = require('async/each')
 var assert = require('assert')
 
 describe('x-xss-protection', function () {
