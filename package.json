@@ -21,7 +21,8 @@
   },
   "bugs": "https://github.com/helmetjs/x-xss-protection/issues",
   "scripts": {
-    "test": "standard && mocha"
+    "pretest": "standard",
+    "test": "mocha"
   },
   "devDependencies": {
     "async": "^1.5.0",
