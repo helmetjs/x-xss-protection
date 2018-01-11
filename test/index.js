@@ -3,7 +3,6 @@ var xssFilter = require('..')
 var connect = require('connect')
 var request = require('supertest')
 var rfile = require('rfile')
-var each = require('async/each')
 var assert = require('assert')
 
 describe('x-xss-protection', function () {
@@ -28,41 +27,51 @@ describe('x-xss-protection', function () {
     })
   })
 
-  it('enables it for supported browsers', function (done) {
-    each(this.enabledBrowsers, function (useragent, callback) {
-      request(this.app).get('/').set('User-Agent', useragent)
-        .expect('X-XSS-Protection', '1; mode=block', callback)
-    }.bind(this), done)
+  it('enables it for supported browsers', function () {
+    return Promise.all(this.enabledBrowsers.map(function (useragent) {
+      return request(this.app)
+        .get('/')
+        .set('User-Agent', useragent)
+        .expect('X-XSS-Protection', '1; mode=block')
+    }.bind(this)))
   })
 
-  it('disables it for unsupported browsers', function (done) {
-    each(this.disabledBrowsers, function (useragent, callback) {
-      request(this.app).get('/').set('User-Agent', useragent)
-        .expect('X-XSS-Protection', '0', callback)
-    }.bind(this), done)
+  it('disables it for unsupported browsers', function () {
+    return Promise.all(this.disabledBrowsers.map(function (useragent) {
+      return request(this.app)
+        .get('/')
+        .set('User-Agent', useragent)
+        .expect('X-XSS-Protection', '0')
+    }.bind(this)))
   })
 
-  it('sets header if there is an empty user-agent', function (done) {
-    request(this.app).get('/').set('User-Agent', '')
-      .expect('X-XSS-Protection', '1; mode=block', done)
+  it('sets header if there is an empty user-agent', function () {
+    return request(this.app)
+      .get('/')
+      .set('User-Agent', '')
+      .expect('X-XSS-Protection', '1; mode=block')
   })
 
-  it('sets header if there is no user-agent', function (done) {
-    request(this.app).get('/').unset('User-Agent')
-      .expect('X-XSS-Protection', '1; mode=block', done)
+  it('sets header if there is no user-agent', function () {
+    return request(this.app)
+      .get('/')
+      .unset('User-Agent')
+      .expect('X-XSS-Protection', '1; mode=block')
   })
 
-  it('allows you to force the header for unsupported browsers', function (done) {
+  it('allows you to force the header for unsupported browsers', function () {
     var app = connect()
     app.use(xssFilter({ setOnOldIE: true }))
     app.use(function (req, res) {
       res.end('Hello world!')
     })
 
-    each(this.disabledBrowsers, function (useragent, callback) {
-      request(app).get('/').set('User-Agent', useragent)
-        .expect('X-XSS-Protection', '1; mode=block', callback)
-    }, done)
+    return Promise.all(this.disabledBrowsers.map(function (useragent) {
+      return request(app)
+        .get('/')
+        .set('User-Agent', useragent)
+        .expect('X-XSS-Protection', '1; mode=block')
+    }))
   })
 
   it('names its function and middleware', function () {

@@ -25,7 +25,6 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "async": "^2.0.1",
     "connect": "^3.4.1",
     "mocha": "^3.0.1",
     "rfile": "^1.0.0",
