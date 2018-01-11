@@ -2,21 +2,23 @@ var xssFilter = require('..')
 
 var connect = require('connect')
 var request = require('supertest')
-var rfile = require('rfile')
+var fs = require('fs')
+var path = require('path')
 var assert = require('assert')
 
 describe('x-xss-protection', function () {
   before(function () {
     function grabList (filename) {
-      return rfile(filename)
+      var filepath = path.join(__dirname, filename)
+      return fs.readFileSync(filepath, { encoding: 'utf8' })
         .split('\n')
         .filter(function (line) {
-          return line.trim() !== ''
+          return line.trim()
         })
     }
 
-    this.enabledBrowsers = grabList('./enabled_browser_list.txt')
-    this.disabledBrowsers = grabList('./disabled_browser_list.txt')
+    this.enabledBrowsers = grabList('enabled_browser_list.txt')
+    this.disabledBrowsers = grabList('disabled_browser_list.txt')
   })
 
   beforeEach(function () {
