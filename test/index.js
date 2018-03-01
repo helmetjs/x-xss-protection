@@ -76,6 +76,22 @@ describe('x-xss-protection', function () {
     }))
   })
 
+  it('uses a reporting uri if specified', function () {
+    var app = connect()
+    var testUri = 'https://test.uri'
+    app.use(xssFilter({ reportUri: testUri }))
+    app.use(function (req, res) {
+      res.end('Hello world!')
+    })
+
+    return Promise.all(this.enabledBrowsers.map(function (useragent) {
+      return request(app)
+        .get('/')
+        .set('User-Agent', useragent)
+        .expect('X-XSS-Protection', '1; report=' + testUri)
+    }))
+  })
+
   it('names its function and middleware', function () {
     assert.equal(xssFilter.name, 'xXssProtection')
     assert.equal(xssFilter().name, 'xXssProtection')

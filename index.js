@@ -1,9 +1,9 @@
 module.exports = function xXssProtection (options) {
-  var checkReport = options && options.reportUri ? '1; report=' + options.reportUri : '1; mode=block'
+  var headerValue = options && options.reportUri ? '1; report=' + options.reportUri : '1; mode=block'
 
   if (options && options.setOnOldIE) {
     return function xXssProtection (req, res, next) {
-      res.setHeader('X-XSS-Protection', checkReport)
+      res.setHeader('X-XSS-Protection', headerValue)
       next()
     }
   } else {
@@ -12,7 +12,7 @@ module.exports = function xXssProtection (options) {
 
       var value
       if (!matches || (parseFloat(matches[1]) >= 9)) {
-        value = checkReport
+        value = headerValue
       } else {
         value = '0'
       }
