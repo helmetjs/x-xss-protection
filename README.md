@@ -22,3 +22,9 @@ To force the header to be set to `1; mode=block` on all versions of IE, add the 
 app.use(xssFilter({ setOnOldIE: true }))
 // This has some security problems for old IE!
 ```
+
+To report errors to a specific URL, add the option:
+
+```javascript
+app.use(xssFilter({ reportUrl: 'https://your_report_url' }))
+```
