@@ -23,8 +23,8 @@ app.use(xssFilter({ setOnOldIE: true }))
 // This has some security problems for old IE!
 ```
 
-To report errors to a specific URL, add the option:
+To report errors to a specific URI, add the option:
 
 ```javascript
-app.use(xssFilter({ reportUrl: 'https://your_report_url' }))
+app.use(xssFilter({ reportUri: 'https://your_report_uri' }))
 ```

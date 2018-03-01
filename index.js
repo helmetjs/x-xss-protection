@@ -1,5 +1,5 @@
 module.exports = function xXssProtection (options) {
-  var checkReport = options && options.reportUrl ? '1; report=' + options.reportUrl : '1; mode=block'
+  var checkReport = options && options.reportUri ? '1; report=' + options.reportUri : '1; mode=block'
 
   if (options && options.setOnOldIE) {
     return function xXssProtection (req, res, next) {
