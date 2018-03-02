@@ -23,8 +23,8 @@ app.use(xssFilter({ setOnOldIE: true }))
 // This has some security problems for old IE!
 ```
 
-You can also optionally configure a report URI, though the flag is [specific to Chrome-based browsers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection). This option will not block requests but sanitize the page and report the violation to the specified URI:
+You can also optionally configure a report URI, though the flag is [specific to Chrome-based browsers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection). This option will report the violation to the specified URI:
 
 ```javascript
-app.use(xssFilter({ reportUri: 'https://your_report_uri' }))
+app.use(xssFilter({ reportUri: '/report-xss-violation' }))
 ```

@@ -1,7 +1,12 @@
 module.exports = function xXssProtection (options) {
-  var headerValue = options && options.reportUri ? '1; report=' + options.reportUri : '1; mode=block'
+  options = options || {}
 
-  if (options && options.setOnOldIE) {
+  var headerValue = '1; mode=block'
+  if (options.reportUri) {
+    headerValue += '; report=' + options.reportUri
+  }
+
+  if (options.setOnOldIE) {
     return function xXssProtection (req, res, next) {
       res.setHeader('X-XSS-Protection', headerValue)
       next()
