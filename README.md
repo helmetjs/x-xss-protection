@@ -12,7 +12,7 @@ This middleware sets the `X-XSS-Protection` header. On modern browsers, it will 
 To use this middleware:
 
 ```javascript
-var xssFilter = require('x-xss-protection')
+const xssFilter = require('x-xss-protection')
 app.use(xssFilter())
 ```
 
