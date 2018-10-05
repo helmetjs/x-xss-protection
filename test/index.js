@@ -92,7 +92,7 @@ describe('x-xss-protection', function () {
   })
 
   it('names its function and middleware', function () {
-    assert.equal(xssFilter.name, 'xXssProtection')
-    assert.equal(xssFilter().name, 'xXssProtection')
+    assert.strictEqual(xssFilter.name, 'xXssProtection')
+    assert.strictEqual(xssFilter().name, 'xXssProtection')
   })
 })
