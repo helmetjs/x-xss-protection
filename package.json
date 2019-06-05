@@ -19,7 +19,10 @@
     "type": "git",
     "url": "git://github.com/helmetjs/x-xss-protection.git"
   },
-  "bugs": "https://github.com/helmetjs/x-xss-protection/issues",
+  "bugs": {
+    "url": "https://github.com/helmetjs/x-xss-protection/issues",
+    "email": "me@evanhahn.com"
+  },
   "scripts": {
     "pretest": "standard --fix",
     "test": "mocha"
