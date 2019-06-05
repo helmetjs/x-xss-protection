@@ -15,6 +15,7 @@
     "xss",
     "x-xss-protection"
   ],
+  "homepage": "https://helmetjs.github.io/docs/xss-filter/",
   "repository": {
     "type": "git",
     "url": "git://github.com/helmetjs/x-xss-protection.git"
