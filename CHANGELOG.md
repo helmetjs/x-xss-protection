@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+### Changed
+- Minor performance improvements with Internet Explorer <9 detection
+
 ## 1.2.0 - 2019-06-15
 ### Added
 - Added TypeScript type definitions. See [#8](https://github.com/helmetjs/x-xss-protection/pull/8)
