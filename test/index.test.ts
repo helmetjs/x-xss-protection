@@ -85,6 +85,29 @@ describe('x-xss-protection', () => {
     }));
   });
 
+  it('allows you to set the mode to "block", which is the default', () => {
+    const testApp = app(xssFilter({ mode: 'block' }));
+    return request(testApp)
+      .get('/')
+      .expect('X-XSS-Protection', '1; mode=block');
+  });
+
+  it('allows you to set the mode to null, disabling mode=block', () => {
+    const testApp = app(xssFilter({ mode: null }));
+    return request(testApp)
+      .get('/')
+      .expect('X-XSS-Protection', '1');
+  });
+
+  it('errors if the mode is anything other than "block" or null', () => {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    expect(xssFilter.bind(null, { mode: undefined } as any)).toThrow();
+    expect(xssFilter.bind(null, { mode: 'BLOCK' } as any)).toThrow();
+    expect(xssFilter.bind(null, { mode: new String('block') } as any)).toThrow(); // eslint-disable-line no-new-wrappers
+    expect(xssFilter.bind(null, { mode: 123 } as any)).toThrow();
+    /* eslint-enable @typescript-eslint/no-explicit-any */
+  });
+
   it('names its function and middleware', () => {
     expect(xssFilter.name).toStrictEqual('xXssProtection');
     expect(xssFilter().name).toStrictEqual('xXssProtection');

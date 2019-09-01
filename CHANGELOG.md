@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased
+### Added
+- Added `mode: null` to disable `mode=block`
+
 ### Changed
 - Minor performance improvements with Internet Explorer <9 detection
 

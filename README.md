@@ -25,3 +25,9 @@ You can also optionally configure a report URI, though the flag is [specific to 
 ```javascript
 app.use(xssFilter({ reportUri: '/report-xss-violation' }))
 ```
+
+To remove `mode=block` from the header, which isn't recommended, set the `mode` option to `null`:
+
+```javascript
+app.use(xssFilter({ mode: null }))
+```

@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 
 interface XXssProtectionOptions {
+  mode?: 'block' | null;
   reportUri?: string;
   setOnOldIE?: boolean;
 }
@@ -14,11 +15,35 @@ function doesUserAgentMatchOldInternetExplorer(userAgent: string | undefined): b
   return matches ? parseFloat(matches[1]) < 9 : false;
 }
 
-export = function xXssProtection (options: XXssProtectionOptions = {}) {
-  let headerValue = '1; mode=block';
-  if (options.reportUri) {
-    headerValue += `; report=${options.reportUri}`;
+function getHeaderValueFromOptions (options: XXssProtectionOptions): string {
+  const directives: string[] = ['1'];
+
+  let isBlockMode: boolean;
+  if ('mode' in options) {
+    if (options.mode === 'block') {
+      isBlockMode = true;
+    } else if (options.mode === null) {
+      isBlockMode = false;
+    } else {
+      throw new Error('The `mode` option must be set to "block" or null.');
+    }
+  } else {
+    isBlockMode = true;
   }
+
+  if (isBlockMode) {
+    directives.push('mode=block');
+  }
+
+  if (options.reportUri) {
+    directives.push(`report=${options.reportUri}`);
+  }
+
+  return directives.join('; ');
+}
+
+export = function xXssProtection (options: XXssProtectionOptions = {}) {
+  const headerValue = getHeaderValueFromOptions(options);
 
   if (options.setOnOldIE) {
     return function xXssProtection (_req: IncomingMessage, res: ServerResponse, next: () => void) {
