@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.0 - 2019-09-01
 ### Added
 - Added `mode: null` to disable `mode=block`
 
